@@ -14,3 +14,17 @@ def index(request):
     num_fictions=Genre.objects.filter(name='fiction').count()
 
     return render(request,'index.html',context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors,'num_fictions':num_fictions})
+
+from django.views import generic
+
+class BookListView(generic.ListView):
+    model = Book
+
+class BookDetailView(generic.DetailView):
+    model = Book
+
+class AuthorListView(generic.ListView):
+    model = Author
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
