@@ -12,8 +12,10 @@ def index(request):
     num_instances_available=BookInstance.objects.filter(status='a').count()
     num_authors=Author.objects.count()
     num_fictions=Genre.objects.filter(name='fiction').count()
+    num_visits=request.session.get('num_visits',0)
+    request.session['num_visits']=num_visits+1
 
-    return render(request,'index.html',context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors,'num_fictions':num_fictions})
+    return render(request,'index.html',context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors,'num_fictions':num_fictions,'num_visits':num_visits})
 
 from django.views import generic
 
